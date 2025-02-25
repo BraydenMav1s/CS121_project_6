@@ -9,20 +9,37 @@ Date::Date() {
     year = 0;
 }
 
-void Date::init(std::string dateString) {
-    this->dateString = dateString;
+void Date::init(std::string dateString){
 
-    std::stringstream ss(dateString);
-    char slash;  // Used to ignore the '/' characters
-    ss >> month >> slash >> day >> slash >> year;
+	Date::dateString = dateString;
+	std::stringstream ss;
+	std::string sMonth;
+	std::string sDay;
+	std::string sYear;
+
+	ss.clear();
+	ss.str(dateString);
+
+	getline(ss, sMonth, '/');
+	getline(ss, sDay, '/');
+	getline(ss, sYear, '/');
+
+	ss.clear();
+	ss.str("");
+
+	ss << sMonth << " " << sDay << " " << sYear;
+	ss >> Date::month >> Date::day >> Date::year;
+
+	if (ss.fail()){
+		std::cout << "failed" << std::endl;
+	} // end if
+	
+	ss.clear();
+	ss.str("");
+
 }
 
-void Date::printDate() const {
-    std::string monthNames[] = {"", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
-
-    if (month >= 1 && month <= 12) {
-        std::cout << monthNames[month] << " " << day << ", " << year << std::endl;
-    } else {
-        std::cout << "Invalid Date: " << dateString << std::endl;
-    }
-}
+void Date::printDate(){
+	std::string months[] = {"NULL", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+	std::cout << months[Date::month] << " " << Date::day << ", " << Date::year << std::endl;
+} 

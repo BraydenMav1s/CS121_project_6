@@ -13,7 +13,7 @@ protected:
 public:
     Date();
     void init(std::string dateString);
-    void printDate() const;
+    void printDate();
 };
 
 #endif 
